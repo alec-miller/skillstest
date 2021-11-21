@@ -1,0 +1,36 @@
+body{
+    background-color: rgba(147, 154, 156, 0.822);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    overflow-y: auto;
+}
+
+#top{
+    background-color: rgba(16, 110, 187, 0.822);
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 77%;
+    position: absolute;
+    border-bottom: solid white 5px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    font-size: 32px;
+}
+
+#table{
+    left: 20%;
+    top: 25%;
+    position: absolute;
+}
+
+tr,td{
+    width: 100px;
+    padding-top: 25px;
+    padding-left: 100px;
+}
+
+#square {
+    width: 300px;
+    height: 300px;
+    background: white;
+}
