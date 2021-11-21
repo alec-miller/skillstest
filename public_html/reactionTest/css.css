@@ -1,0 +1,53 @@
+body{
+    background-color: rgba(16, 110, 187, 0.822);
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+#top{
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 90%;
+    position: absolute;
+    padding-left: 30px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+#name{
+    font-size: 36px;
+}
+
+#leaderboard{
+    font-size: 36px;
+    padding-left: 2%;;
+}
+
+#login{
+    padding-left: 50%;
+    font-size: 36px;
+}
+
+#signup{
+    font-size: 36px;
+    padding-left: 2%;
+}
+
+#clickBox{
+    background-color: rgb(196, 191, 191);
+    top: 10%;
+    left: 0%;
+    right: 0%;
+    bottom: 40%;
+    position: absolute;
+    text-align: center;
+}
+
+#title{
+    font-size: 56px;
+    font-weight: bold;
+}
+
+#desc_1,#desc_2{
+    font-size: 36px;
+}

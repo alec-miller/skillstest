@@ -9,9 +9,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Oogla</title>
+    <title>Skills Test</title>
     <link id="cssFile" rel="stylesheet" type="text/css" href="css.css">
-    <script src=""></script>
+    <script src="code.js"></script>
   </head>
   <body>
     <div id>
@@ -22,18 +22,30 @@
             <table id="table">
                 <tr>
                     <td>
-                        <div id="square"></div>
+                        <div id="square_1" onmouseover="hover(1)" onmouseleave="noHover(1)"
+                        onclick="reactionTest()">
+                            <p id="skill_1">Reaction Test</p>
+                        </div>
                     </td>
                     <td>
-                        <div id="square"></div>
+                        <div id="square_2" onmouseover="hover(2)" onmouseleave="noHover(2)"
+                        onclick="sequenceMemory()">
+                            <p id="skill_2">Sequence Memory</p>
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td>   
-                        <div id="square"></div>
+                        <div id="square_3" onmouseover="hover(3)" onmouseleave="noHover(3)"
+                        onclick="numberMemory()">
+                            <p id="skill_3">Number Memory</p>
+                        </div>
                     </td>
                     <td>   
-                        <div id="square"></div>
+                        <div id="square_4" onmouseover="hover(4)" onmouseleave="noHover(4)"
+                        onclick="visualMemory()">
+                            <p id="skill_4">Visual Memory</p>
+                        </div>
                     </td>
                 </tr>
             </table>

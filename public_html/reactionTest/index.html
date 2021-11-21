@@ -1,0 +1,32 @@
+<!--
+    Author: Alec Miller
+    Description: This website allows the people who visit it to create a user, with details
+    such as username and password. They can then add a listing with, title, description, image,
+    price and the status. The website then takes the listed item and adds
+    it to the lister's array of listings.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Skills Test</title>
+    <link id="cssFile" rel="stylesheet" type="text/css" href="css.css">
+    <script src="code.js"></script>
+  </head>
+  <body>
+    <div id>
+        <div id="top">
+            <span id="name" onclick="goHome()">Skills Test</span>
+            <span id="leaderboard" onclick="goLeaderboard()">Leaderboard</span>
+            <span id="login" onclick="login()">LOGIN</span>
+            <span id="signup" onclick="signup()">SIGN UP</span>
+        </div>
+        <div id="clickBox" onclick="startGame()">
+            <p id="title">Reaction Test</p>
+            <p id="desc_1">Click as soon as possible once the area turns green.</p>
+            <p id="desc_2">Click anywhere to start.</p>
+        </div>
+        <div id="bottom"></div>
+    </div>
+  </body>
+</html>
