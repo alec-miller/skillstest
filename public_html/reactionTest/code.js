@@ -2,6 +2,22 @@ function goHome(){
     window.location.href='/app/index.html'
 }
 
+function goLeaderboard(){
+    window.location.href='/leaderboard/index.html'
+}
+
+function goJoin(){
+    window.location.href='/login/index.html'
+}
+
+function hover(id){
+    document.getElementById(id).style.backgroundColor = "rgba(16, 110, 187)";
+}
+
+function unhover(id){
+    document.getElementById(id).style.backgroundColor = "";
+}
+
 let started = false;
 let earlyClick = false;
 let startTime;

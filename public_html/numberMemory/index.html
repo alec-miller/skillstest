@@ -1,0 +1,34 @@
+<!--
+    Description: A random number gets displayed and the player has to memorize it and reinput
+    the same number to move on to the next number
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Skills Test</title>
+    <link id="cssFile" rel="stylesheet" type="text/css" href="css.css">
+    <script src="code.js"></script>
+  </head>
+  <body>
+    <div id>
+        <div id="top">
+            <span id="name" onclick="goHome()" onmouseover="hover('name')" onmouseleave="unhover('name')">Skills Test</span>
+            <span id="leaderboard" onclick="goLeaderboard()" onmouseover="hover('leaderboard')"
+             onmouseleave="unhover('leaderboard')">Leaderboard</span>
+            <span id="login" onclick="login()" onmouseover="hover('login')" onmouseleave="unhover('login')">LOGIN</span>
+            <span id="signup" onclick="signup()" onmouseover="hover('signup')" onmouseleave="unhover('signup')">SIGN UP</span>
+        </div>
+        <div id="clickBox" onclick="startGame()">
+            <p id="title">Number Memory</p>
+            <div id="timer"></div>
+            <p id="desc_1">Remember the number and repeat it.</p>
+            <p id="desc_2">Click anywhere to start.</p>
+        </div>
+        <div id="bottom">
+            <span id="pb">Personal Best: 0</span>
+            <span id="current_score">Current Score: 0</span>
+        </div>
+    </div>
+  </body>
+</html>

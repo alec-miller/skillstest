@@ -64,7 +64,7 @@ body{
     top: 10%;
     left: 0%;
     right: 0%;
-    bottom: 40%;
+    bottom: 30%;
     position: absolute;
     text-align: center;
 }
@@ -74,6 +74,63 @@ body{
     font-weight: bold;
 }
 
+#bottom{
+    font-size: 36px;
+    top: 70%;
+    left: 0%;
+    right: 0%;
+    position: absolute;
+}
+
+#pb{
+    padding-left: 10%;
+}
+
+#current_score{
+    padding-left: 45%;
+}
+
 #desc_1,#desc_2{
     font-size: 36px;
+}
+
+.timer {
+    width: 40%;
+    margin: 25px auto;
+  }
+  .timer .inner {
+    height: 15px;
+    animation: progressbar-countdown;
+    animation-duration: 40s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    /* We start paused, we start the animation using javascript */
+    animation-play-state: paused;
+    /* We want a linear animation, ease-out is standard */
+    animation-timing-function: linear;
+  }
+  @keyframes progressbar-countdown {
+    0% {
+      width: 100%;
+      background: #0F0;
+    }
+    100% {
+      width: 0%;
+      background: #F00;
+    }
+}
+
+#input{
+    background-color: rgba(155, 205, 238, 0.568);
+    width: 400px;
+    height: 35px;
+    font-size: 32px;
+    margin-right: 20px;
+}
+
+#btn{
+    width: 100px;
+    height: 30px;
+    margin-top: 20px;
+    background-color: antiquewhite;
 }
