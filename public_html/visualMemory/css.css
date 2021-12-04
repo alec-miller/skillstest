@@ -1,0 +1,150 @@
+body{
+    background-color: rgba(16, 110, 187, 0.822);
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+#top{
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 90%;
+    position: absolute;
+    padding-left: 30px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+#name{
+    top: 0%;
+    left: 0%;
+    position: absolute;
+    width: 220px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+#leaderboard{
+    top: 0%;
+    left: 15%;
+    position: absolute;
+    width: 250px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+#login{
+    top: 0%;
+    left: 75%;
+    position: absolute;
+    width: 170px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+#signup{
+    top: 0%;
+    right: 0%;
+    position: absolute;
+    width: 170px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    padding-top: 15px;
+    margin-right: 20px;
+}
+
+#clickBox{
+    background-color: rgb(196, 191, 191);
+    top: 10%;
+    left: 0%;
+    right: 0%;
+    bottom: 15%;
+    position: absolute;
+    text-align: center;
+}
+
+#title{
+    font-size: 56px;
+    font-weight: bold;
+}
+
+#bottom{
+    font-size: 36px;
+    top: 85%;
+    left: 0%;
+    right: 0%;
+    position: absolute;
+}
+
+#pb{
+    padding-left: 10%;
+}
+
+#current_score{
+    padding-left: 45%;
+}
+
+#desc_1,#desc_2{
+    font-size: 36px;
+}
+
+.square{
+    width: 125px;
+    height: 125px;
+    background-color: rgb(91, 178, 236);
+    border: 1px solid black;
+    border-radius: 25px;
+}
+
+#table{
+    left: 35%;
+    top: 6%;
+    right: 35%;
+    bottom: 10%;
+    position: absolute;
+    /* visibility: hidden; */
+}
+
+tr,td{
+    width: 200px;
+    padding-top: 25px;
+}
+
+#lives{
+    top: 33%;
+    right: 75%;
+    position: absolute;
+    font-size: 48px;
+    width: 200px;
+}
+
+.hearts{
+    top: 42%;
+    right: 72.7%;
+    position: absolute;
+    font-size: 60px;
+    width: 200px;
+    color: red;
+}
+
+#heart_1{
+    margin-right: 80px;
+}
+
+#heart_2{
+    margin-right: 40px
+}
+
+#game_started{
+    visibility: hidden;
+}
+
+#not_started{
+    visibility: auto;
+}

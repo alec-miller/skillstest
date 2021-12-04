@@ -36,6 +36,7 @@ function startGame(){
         }
         t.innerHTML = valToGuess;
         createProgressbar("timer","2s");
+        // Wait 2 seconds for user to memorize, then quiz them.
         setTimeout(function(){
             running = false;
             answerBox = document.getElementById('clickBox');

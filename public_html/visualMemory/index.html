@@ -1,0 +1,60 @@
+<!--
+    Description: A random number gets displayed and the player has to memorize it and reinput
+    the same number to move on to the next number
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Visual Memory</title>
+    <link id="cssFile" rel="stylesheet" type="text/css" href="css.css">
+    <script src="code.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+  </head>
+  <body>
+    <div id>
+        <div id="top">
+            <span id="name" onclick="goHome()" onmouseover="hover('name')" onmouseleave="unhover('name')">Skills Test</span>
+            <span id="leaderboard" onclick="goLeaderboard()" onmouseover="hover('leaderboard')"
+             onmouseleave="unhover('leaderboard')">Leaderboard</span>
+            <span id="login" onclick="login()" onmouseover="hover('login')" onmouseleave="unhover('login')">LOGIN</span>
+            <span id="signup" onclick="signup()" onmouseover="hover('signup')" onmouseleave="unhover('signup')">SIGN UP</span>
+        </div>
+        <div id="clickBox" onclick="startGame()">
+            <div id="not_started">
+                <p id="title">Visual Memory</p>
+                <div id="timer"></div>
+                <p id="desc_1">Memorize the squares.</p>
+                <p id="desc_2">Click anywhere to start.</p>
+            </div>
+            <div id="game_started">
+                <span id="lives">Lives:</span>
+                <span id="heart_1" class="hearts">&hearts;</span>
+                <span id="heart_2" class="hearts">&hearts;</span>
+                <span id="heart_3" class="hearts">&hearts;</span>
+                <table id="table">
+                    <tr id="row_1">
+                        <td><div id="square_0" class="square" onclick="guess(0)"></div></td>
+                        <td><div id="square_1" class="square" onclick="guess(1)"></div></td>
+                        <td><div id="square_2" class="square" onclick="guess(2)"></div></td>
+                    </tr>
+                    <tr id="row_2">   
+                        <td><div id="square_3" class="square" onclick="guess(3)"></div></td>
+                        <td><div id="square_4" class="square" onclick="guess(4)"></div></td>
+                        <td><div id="square_5" class="square" onclick="guess(5)"></div></td>
+                    </tr>
+                    <tr id="row_3">
+                        <td><div id="square_6" class="square" onclick="guess(6)"></div></td>
+                        <td><div id="square_7" class="square" onclick="guess(7)"></div></td>
+                        <td><div id="square_8" class="square" onclick="guess(8)"></div></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="bottom">
+            <span id="pb"></span>
+            <span id="current_score"></span>
+        </div>
+    </div>
+  </body>
+</html>
