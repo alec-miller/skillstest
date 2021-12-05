@@ -6,7 +6,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Visual Memory</title>
+    <title>Sequence Memory</title>
     <link id="cssFile" rel="stylesheet" type="text/css" href="css.css">
     <script src="code.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
@@ -22,16 +22,12 @@
         </div>
         <div id="clickBox" onclick="startGame()">
             <div id="not_started">
-                <p id="title">Visual Memory</p>
+                <p id="title">Sequence Memory</p>
                 <div id="timer"></div>
-                <p id="desc_1">Memorize the squares.</p>
+                <p id="desc_1">Memorize the pattern.</p>
                 <p id="desc_2">Click anywhere to start.</p>
             </div>
             <div id="game_started">
-                <span id="lives">Lives:</span>
-                <span id="heart_1" class="hearts">&hearts;</span>
-                <span id="heart_2" class="hearts">&hearts;</span>
-                <span id="heart_3" class="hearts">&hearts;</span>
                 <table id="table">
                     <tr id="row_1">
                         <td><div id="square_0" class="square" onclick="guess(0)"></div></td>
@@ -54,7 +50,6 @@
         <div id="bottom">
             <span id="pb"></span>
             <span id="current_score"></span>
-            <input type="button" id="retry" value="Try again!" style="visibility: hidden;">
         </div>
     </div>
   </body>
