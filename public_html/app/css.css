@@ -1,37 +1,91 @@
 body{
-    background-color: rgba(147, 154, 156, 0.822);
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgba(16, 110, 187, 0.822);
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
     overflow-y: auto;
 }
 
 #top{
-    background-color: rgba(16, 110, 187, 0.822);
     top: 0%;
     left: 0%;
     right: 0%;
-    bottom: 77%;
+    bottom: 90%;
     position: absolute;
-    border-bottom: solid white 5px;
     padding-left: 30px;
-    padding-bottom: 10px;
-    font-size: 32px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+#name{
+    top: 0%;
+    left: 0%;
+    position: absolute;
+    width: 220px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+#leaderboard{
+    top: 0%;
+    left: 15%;
+    position: absolute;
+    width: 250px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+#login{
+    top: 0%;
+    left: 75%;
+    position: absolute;
+    width: 170px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+#signup{
+    top: 0%;
+    right: 0%;
+    position: absolute;
+    width: 170px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    padding-top: 15px;
+    margin-right: 20px;
 }
 
 #table{
+    top: 0%;
     left: 20%;
-    top: 25%;
     position: absolute;
+}
+
+#content{
+    background-color: rgb(196, 191, 191);
+    top: 10%;
+    left: 0%;
+    right: 0%;
+    bottom: 5%;
+    height: 630px;
+    position: absolute;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 tr,td{
     width: 100px;
-    padding-top: 25px;
     padding-left: 100px;
 }
 
 #square_1,#square_2,#square_3,#square_4{
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     background: white;
     text-align: center;
 }

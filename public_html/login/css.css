@@ -1,17 +1,7 @@
-/*
-
-Reaction test
--------------------
-The user is prompted with a box to click when ready, when clicked, the box turns
-red and says "wait for green", once the box turns green the user must click as
-fast as they can. They do this 5 times and their average reaction time over those
-5 clicks are shown.
-
-*/
-
 body{
     background-color: rgba(16, 110, 187, 0.822);
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    overflow-y: auto;
 }
 
 #top{
@@ -23,14 +13,6 @@ body{
     padding-left: 30px;
     font-weight: bold;
     padding-top: 10px;
-}
-
-#bottom{
-    font-size: 36px;
-    top: 70%;
-    left: 0%;
-    right: 0%;
-    position: absolute;
 }
 
 #name{
@@ -78,29 +60,38 @@ body{
     margin-right: 20px;
 }
 
-#clickBox{
+#table{
+    top: 0%;
+    left: 20%;
+    position: absolute;
+}
+
+#content{
     background-color: rgb(196, 191, 191);
     top: 10%;
     left: 0%;
     right: 0%;
-    bottom: 30%;
+    bottom: 5%;
+    height: 630px;
     position: absolute;
+    margin-bottom: 10px;
     text-align: center;
 }
 
-#title{
-    font-size: 56px;
+tr,td{
+    width: 100px;
+    padding-left: 100px;
+}
+
+#square_1,#square_2,#square_3,#square_4{
+    width: 250px;
+    height: 250px;
+    background: white;
+    text-align: center;
+}
+
+#skill_1,#skill_2,#skill_3,#skill_4{
+    font-size: 50px;
     font-weight: bold;
-}
-
-#desc_1,#desc_2{
-    font-size: 36px;
-}
-
-#pb{
-    padding-left: 10%;
-}
-
-#current_score{
-    padding-left: 40%;
+    padding-top: 25%;
 }

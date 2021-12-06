@@ -1,3 +1,14 @@
+/*
+
+Visual Memory
+----------------
+There's a 3x3 grid of squares, increasing as the levels increase. The user has
+to remember which squares get highlighted, then input those same squares in the exact
+order or else they fail. The amount of squares highlighted is equal to the level the user
+is currently on.
+
+*/
+
 function goHome(){
     window.location.href='/app/index.html'
 }
@@ -6,7 +17,11 @@ function goLeaderboard(){
     window.location.href='/leaderboard/index.html'
 }
 
-function goJoin(){
+function login(){
+    window.location.href='/login/index.html'
+}
+
+function signup(){
     window.location.href='/login/index.html'
 }
 
@@ -27,13 +42,14 @@ let correctSquares = [];
 let guessed = [];
 let allowGuessing = false;
 let game_started = false;
-let currHeart = 1;
+let currHeart = 0;
 let levelsUntilUpgrade = 2;
 let levelMultiplier = 1;
 let levelsPerRound = 2;
 let currTop = 4;
 let borderRadius = 20;
 
+// Start the game unless it's already going
 function startGame(){
     if(!game_started){
         game_started = true;
@@ -41,18 +57,22 @@ function startGame(){
         document.getElementById("current_score").innerHTML = "Current Score: "+score;
         document.getElementById("not_started").style.visibility = "hidden";
         document.getElementById("game_started").style.visibility = "visible";
+        correctSquares = [];
+        // Get which squares to guess
         while(correctSquares.length < squaresToGuess){
             let pos = Math.floor(Math.random() * numOfSquares);
             if(!correctSquares.includes(pos)){
                 correctSquares.push(pos);
             }
         }
+        // Show the correct squares to guess
         setTimeout(function(){
             for(let x = 0; x < correctSquares.length; x++){
                 let sq = "square_" + correctSquares[x];
                 document.getElementById(sq).style.backgroundColor = "gray";
             }
         },500);
+        // Hide the correct squares to guess
         setTimeout(function(){
             for(let x = 0; x < correctSquares.length; x++){
                 let sq = "square_" + correctSquares[x];
@@ -65,10 +85,12 @@ function startGame(){
 
 function guess(num){
     // Stop unneccessary clicking when answer is showing
+    console.log(num);
     if(allowGuessing){
         let guess = "square_"+num;
         // Correct square guess and hasn't been guessed before
         if(correctSquares.includes(num) && !guessed.includes(num)){
+            guessed.push(num);
             document.getElementById(guess).style.backgroundColor = "white";
             correctSquares = correctSquares.filter(function(val){
                 return val !== num;
@@ -94,25 +116,21 @@ function guess(num){
             }
         } // Squares that haven't been guessed
         else if(!guessed.includes(num)){
+            guessed.push(num);
             document.getElementById(guess).style.backgroundColor = "rgb(88, 88, 88)";
             currWrongGuesses++;
             // 3 Wrong guesses, reset round
             if(currWrongGuesses > 2){
                 document.getElementById("clickBox").style.backgroundColor = "#f16056"
                 setTimeout(function(){
-                    document.getElementById("clickBox").style.backgroundColor = "rgb(196, 191, 191)"
-                    document.getElementById("heart_"+currHeart).style.color = "rgb(88, 88, 88)"
+                    document.getElementById("clickBox").style.backgroundColor = "rgb(196, 191, 191)";
                     currHeart++;
+                    document.getElementById("heart_"+currHeart).style.color = "rgb(88, 88, 88)";
                     // Gameover, reset everything
-                    if(currHeart > 3){
+                    if(currHeart > 2){
                         if(score > pb){
                             pb = score;
                         }
-                        score = 0;
-                        guessed = [];
-                        currWrongGuesses = 0;
-                        allowGuessing = false;
-                        game_started = false;
                         gameover();
                     // Lost a life, reset round
                     }else{
@@ -130,10 +148,27 @@ function guess(num){
                 guessed = [];
             }
         }
-        guessed.push(num);
     }
 }
 
+// Reset everything and show the score
+function gameover(){
+    reset_squares();
+    reset_hearts();
+    document.getElementById("not_started").style.visibility = "visible";
+    document.getElementById("game_started").style.visibility = "hidden";
+    document.getElementById("title").innerHTML = "Score: "+score;
+    document.getElementById("desc_1").innerHTML = "";
+    document.getElementById("desc_2").innerHTML = "Click to play again.";
+    score = 0;
+    guessed = [];
+    currWrongGuesses = 0;
+    allowGuessing = false;
+    game_started = false;
+    currHeart = 0;
+}
+
+// Update board with more squares and reshape/realign old squares
 function updateBoard(){
     let t = document.getElementById("table");
     t.style.top = "0%";
@@ -158,7 +193,7 @@ function updateBoard(){
             }
         }
     }
-    let width = $(".square").width() - 25;
+    let width = $(".square").width() - 20;
     $(".square").css({
         width: width,
         height: width,
@@ -168,11 +203,19 @@ function updateBoard(){
     levelMultiplier++;
     levelsUntilUpgrade = levelsPerRound;
     currTop--;
-    borderRadius - 2.5;
+    borderRadius - 2;
 }
 
+// Reset all the squares to their original color
 function reset_squares(){
     for(let x = 0; x < numOfSquares; x++){
         document.getElementById("square_"+x).style.backgroundColor = "rgb(91, 178, 236)";
+    }
+}
+
+// Reset all the hearts to red
+function reset_hearts(){
+    for(let x = 1; x < 4; x++){
+        document.getElementById("heart_"+x).style.color = "red";
     }
 }

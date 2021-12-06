@@ -6,7 +6,7 @@ function goLeaderboard(){
     window.location.href='/leaderboard/index.html'
 }
 
-function goJoin(){
+function login(){
     window.location.href='/login/index.html'
 }
 

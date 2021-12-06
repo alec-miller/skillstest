@@ -1,6 +1,12 @@
 <!--
-    Description: Reaction test, press the center when ready to start, press the area
-    when it turns green, after 5 runs your average score gets shown
+
+Reaction test
+-------------------
+The user is prompted with a box to click when ready, when clicked, the box turns
+red and says "wait for green", once the box turns green the user must click as
+fast as they can. They do this 5 times and their average reaction time over those
+5 clicks are shown.
+
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +30,11 @@
             <p id="desc_1">Click as soon as possible once the area turns green.</p>
             <p id="desc_2">Click anywhere to start.</p>
         </div>
-        <div id="bottom"></div>
+        <div id="bottom">
+          <span id="pba">Personal Best Average: </span>
+          <span id="current_score">Current Average: </span>
+          <p id="pbc">Personal Best Click: </p>
+        </div>
     </div>
   </body>
 </html>

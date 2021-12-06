@@ -1,3 +1,14 @@
+/* 
+
+Visual Memory
+----------------
+There's a 3x3 grid of squares, increasing as the levels increase. The user has
+to remember which squares get highlighted, then input those same squares in the exact
+order or else they fail. The amount of squares highlighted is equal to the level the user
+is currently on.  
+
+*/
+
 body{
     background-color: rgba(16, 110, 187, 0.822);
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
@@ -64,7 +75,7 @@ body{
     top: 10%;
     left: 0%;
     right: 0%;
-    bottom: 15%;
+    bottom: 10%;
     position: absolute;
     text-align: center;
 }
@@ -76,7 +87,7 @@ body{
 
 #bottom{
     font-size: 36px;
-    top: 85%;
+    top: 90%;
     left: 0%;
     right: 0%;
     position: absolute;
@@ -108,7 +119,6 @@ body{
     right: 35%;
     bottom: 10%;
     position: absolute;
-    /* visibility: hidden; */
 }
 
 tr,td{

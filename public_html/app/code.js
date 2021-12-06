@@ -12,6 +12,14 @@ function noHover(num){
     square.style.boxShadow = "";
 }
 
+function topHover(id){
+    document.getElementById(id).style.backgroundColor = "rgba(16, 110, 187)";
+}
+
+function topUnhover(id){
+    document.getElementById(id).style.backgroundColor = "";
+}
+
 function reactionTest(){
     window.location.href = '/reactionTest/index.html';
 }
@@ -26,4 +34,17 @@ function sequenceMemory(){
 
 function numberMemory(){
     window.location.href = '/numberMemory/index.html';
+}
+
+function login(){
+    console.log("hi");
+    window.location.href = '/login/index.html';
+}
+
+function signup(){
+    window.location.href = '/login/index.html';
+}
+
+function goLeaderboard(){
+    window.location.href = '/leaderboard/index.html';
 }
