@@ -7,11 +7,11 @@ function goLeaderboard(){
 }
 
 function login(){
-    window.location.href='/login/index.html'
+    window.location.href='/account/index.html'
 }
 
 function signup(){
-    window.location.href='/login/index.html'
+    window.location.href='/account/index.html'
 }
 
 function hover(id){
@@ -22,6 +22,35 @@ function unhover(id){
     document.getElementById(id).style.backgroundColor = "";
 }
 
+function profile(){
+    window.location.href = '/profile/index.html';
+}
+
+function checkUser(){
+    var httpRequest = new XMLHttpRequest();
+    if (!httpRequest) { return false; }
+    httpRequest.onreadystatechange = () => {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200) {
+            let login = document.getElementById('login');
+            if(httpRequest.responseText != "guest"){
+                login.innerHTML = "PROFILE";
+                login.setAttribute("onClick","profile()")
+                user = "user";
+            }else{
+                login.innerHTML = "LOGIN";
+                login.setAttribute("onClick","login()")
+            }
+        }else { 
+            alert('Response failure'); }
+        }
+    }
+    let url = '/get/user';
+    httpRequest.open('GET', url);
+    httpRequest.send();
+}
+checkUser();
+
 let score = 0;
 let pb = 0;
 let correctSquares = [];
@@ -29,11 +58,14 @@ let curr_index = 0;
 let allowGuessing = false;
 let game_started = false;
 let gameover = false;
+let user = "guest";
 
 function startGame(){
+    if(curr_index == 0){
+        getScores();
+    }
     if(!game_started || gameover){
         game_started = true;
-        document.getElementById("pb").innerHTML = "Personal Best: " + pb;
         document.getElementById("current_score").innerHTML = "Current Score: "+score;
         document.getElementById("not_started").style.visibility = "hidden";
         document.getElementById("game_started").style.visibility = "visible";
@@ -80,9 +112,7 @@ function guess(num){
                 }
             },250)
         }else{
-            if(score > pb){
-                pb = score;
-            }
+            sendScores();
             document.getElementById("not_started").style.visibility = "visible";
             document.getElementById("game_started").style.visibility = "hidden";
             document.getElementById("title").innerHTML = "Score: " + score;
@@ -107,3 +137,44 @@ function reset_squares(){
         document.getElementById("square_"+x).style.backgroundColor = "rgb(91, 178, 236)";
     }
 }
+
+function sendScores(){
+    var httpRequest = new XMLHttpRequest();
+    if (!httpRequest) { return false; }
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            if (httpRequest.status === 200) {
+            } else { alert('Response failure'); }
+        }
+    }
+    newObject = { 'score':score}
+    dataString = JSON.stringify(newObject);
+    let url = '/sequenceScores/';
+    httpRequest.open('POST', url);
+    httpRequest.setRequestHeader('Content-type', 'application/json');
+    httpRequest.send(dataString);
+}
+
+function getScores() {
+    if(user == "guest"){
+        document.getElementById("pb").innerHTML = "Personal Best: " + pb;
+    }
+    var httpRequest = new XMLHttpRequest();
+    if (!httpRequest) { return false; }
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            if (httpRequest.status === 200) {
+                let scores = httpRequest.responseText;
+                if(scores == "undefined" || scores == "10000000"){
+                    pb = 0;
+                }else{
+                    pb = scores;
+                }
+                document.getElementById("pb").innerHTML = "Personal Best: " + pb;
+            } else { alert('Response failure'); }
+        }
+    }
+    let url = '/get/sequenceScores/';
+    httpRequest.open('GET', url);
+    httpRequest.send();
+  }

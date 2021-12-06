@@ -1,6 +1,7 @@
 body{
     background-color: rgba(16, 110, 187, 0.822);
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    overflow-y: auto;
 }
 
 #top{
@@ -13,6 +14,7 @@ body{
     font-weight: bold;
     padding-top: 10px;
 }
+
 #name{
     top: 0%;
     left: 0%;
@@ -58,67 +60,45 @@ body{
     margin-right: 20px;
 }
 
-#clickBox{
+#content{
     background-color: rgb(196, 191, 191);
     top: 10%;
     left: 0%;
     right: 0%;
-    bottom: 15%;
+    bottom: 5%;
+    height: 630px;
     position: absolute;
+    margin-bottom: 10px;
     text-align: center;
+    font-size: 32px;
 }
 
-#title{
-    font-size: 56px;
-    font-weight: bold;
-}
-
-#bottom{
-    font-size: 36px;
-    top: 85%;
+#left{
+    top: 10%;
     left: 0%;
+    right:50%;
+    position: absolute;
+    border-right: 1px solid black;
+}
+
+#right{
+    top: 10%;
+    left: 50%;
     right: 0%;
     position: absolute;
+    border-left: 1px solid black;
 }
 
-#pb{
-    padding-left: 10%;
+#caa, #loginSign{
+    font-weight: bolder;
+    font-size: 42px;
 }
 
-#current_score{
-    padding-left: 45%;
-}
-
-#desc_1,#desc_2{
-    font-size: 36px;
-}
-
-.square{
-    width: 125px;
-    height: 125px;
-    background-color: rgb(91, 178, 236);
-    border: 1px solid black;
-    border-radius: 25px;
-}
-
-#table{
-    left: 35%;
-    top: 6%;
-    right: 35%;
-    bottom: 10%;
-    position: absolute;
-    /* visibility: hidden; */
-}
-
-tr,td{
+#login_account, #create_account, #username, #password, #cu_username, #cu_password{
     width: 200px;
-    padding-top: 25px;
+    font-size: 20px;
 }
 
-#game_started{
-    visibility: hidden;
-}
-
-#not_started{
-    visibility: auto;
+#bad_login, #created{
+    font-size: 32px;
 }

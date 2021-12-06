@@ -6,33 +6,33 @@ const cookieParser = require('cookie-parser')
 const app = express()
 const port = 3000
 const db = mongoose.connection;
-const mongoDBURL = 'mongodb://127.0.0.1/oogla'
-var user = null;
+const mongoDBURL = 'mongodb://127.0.0.1/skillstest'
+var user = "guest";
 
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-const itemsSchema = new mongoose.Schema({
-    title: String,
-    desc: String,
-    image: String,
-    price: Number,
-    status: String
-});
 const usersSchema = new mongoose.Schema({
     username: String,
     password: String,
-    listings: [itemsSchema],
-    purchases: [itemsSchema] });
+    reactionTestAverages: [Number],
+    reactionTestClicks: [Number],
+    bestReactionTestAverage: Number,
+    bestReactionTestClick: Number,
+    numberMemoryScores: [Number],
+    bestNumberMemoryScore: Number,
+    sequenceMemoryScores: [Number],
+    bestSequenceMemoryScore: Number,
+    visualMemoryScores: [Number],
+    bestVisualMemoryScore: Number,
+});
 
-const Items = mongoose.model('Items', itemsSchema);
 const Users = mongoose.model('Users', usersSchema);
 
 app.use( parser.text({type: '*/*'}) );
 app.use(cookieParser());
 
 var sessions = {};
-const LOGIN_TIME = 600000;
+const LOGIN_TIME = 600000000000000;
 
 function filterSessions() {
     var now = Date.now();
@@ -46,9 +46,7 @@ function filterSessions() {
 
 setInterval(filterSessions, 2000);
 
-app.get('/login/*',authenticate);
 app.use(express.static('public_html'))
-app.get('/', (req, res) => { res.redirect('/app/index.html'); });
 
 function addSession(username) {
     var now = Date.now();
@@ -74,7 +72,7 @@ function authenticate(req, res, next) {
     }
   }
 
-app.post('/app/create/:username/:password', function (req, res) {
+app.post('/account/create/:username/:password', function (req, res) {
     var count = 0;
     Users.find().exec((err, results)=>{
         results.forEach(function(error,num){
@@ -85,7 +83,12 @@ app.post('/app/create/:username/:password', function (req, res) {
         if(count == 0){
             var newUser = new Users({
                 username: req.params.username,
-                password: req.params.password
+                password: req.params.password,
+                bestReactionTestAverage: 10000000,
+                bestReactionTestClick: 10000000,
+                bestNumberMemoryScore: 0,
+                bestSequenceMemoryScore: 0,
+                bestVisualMemoryScore: 0
             });
             newUser.save(function (err) { if (err) console.log('FAIL'); });
             res.send("valid");
@@ -95,7 +98,7 @@ app.post('/app/create/:username/:password', function (req, res) {
     })
 });
 
-app.get('/app/login/:username/:password', (req, res) => {
+app.get('/account/login/:username/:password', (req, res) => {
     Users.find({}).exec( function (err, results) {
         results.forEach(function(error,num){
             if (err) { 
@@ -104,7 +107,7 @@ app.get('/app/login/:username/:password', (req, res) => {
                 if(results[num]["password"] === req.params.password){
                     user = results[num]["username"];
                     addSession(req.params.username);
-                    res.cookie("login", {username: req.params.username}, {maxAge: 6000000});
+                    res.cookie("login", {username: req.params.username}, {maxAge: LOGIN_TIME});
                     res.end('1');
                 }else{
                     res.end('bad');
@@ -114,86 +117,135 @@ app.get('/app/login/:username/:password', (req, res) => {
     });
 });
 
-app.post('/login/listing', function (req, res) {
-    itemData = JSON.parse( req.body );
-    var newItem = new Items({
-        title: itemData.title,
-        desc: itemData.desc,
-        image: itemData.image,
-        price: itemData.price,
-        status: itemData.status
-    });
-    Users.find().exec((err, results)=>{
+app.post('/reactionScores', (req, res) => {
+    let requestData = JSON.parse( req.body );
+    let average = requestData.average;
+    let scores = requestData.scores;
+    Users.find({}).exec( function (err, results) {
         results.forEach(function(error,num){
-            if(results[num]["username"] === user){
-                results[num]["listings"].push(newItem);
-                results[num].save(function (err) {if (err) console.log('FAIL');});
-            }
-        })
-    })
-    newItem.save(function (err) {if (err) console.log('FAIL'); });
-    res.send('SAVED');
-});
-
-app.get('/search/listings/:KEYWORD', (req, res) => {
-    var str = "";
-    var l = [];
-    Items.find().exec((err, results)=>{
-        results.forEach(function(error,num){
-            if(results[num]["desc"].includes(req.params.KEYWORD)){
-                str += JSON.stringify(results[num]);
-                l.push(results[num]);
-            }
-        })
-    res.end(JSON.stringify(l));
-    })
-});
-
-app.get('/get/listings', (req, res) => {
-    Users.find().exec((err, results)=>{
-        results.forEach(function(error,num){
-            if(results[num]["username"] === user){
-                res.end(JSON.stringify(results[num]["listings"]));
-            }
-        })
-    })
-});
-
-app.post('/sold/:ITEM', (req, res) => {
-    let x;
-    Items.find().exec((err, results)=>{
-        results.forEach(function(error,num){
-            if(results[num]["title"] === req.params.ITEM){
-                x = results[num];
-                results[num]["status"] = "SOLD";
-                results[num].save(function (err) {if (err) console.log('FAIL');});
-            }
-        })
-    })
-    Users.find().exec((err, data)=>{
-        data.forEach(function(error,val){
-            if(data[val]["username"] === user){
-                data[val]["purchases"].push(x);
-                data[val].save(function (err) {if (err) console.log('FAIL');});
-            };
-            for(i in data[val]["listings"]){
-                if(data[val]["listings"][i]["title"] === req.params.ITEM){
-                    data[val]["listings"][i]["status"] = "SOLD";
-                    data[val].save(function (err) {if (err) console.log("FAIL");});
+            if (err) { 
+                return res.end("guest");
+            } else if (results[num]["username"] === user) {
+                if(average < results[num]["bestReactionTestAverage"]){
+                    results[num]["bestReactionTestAverage"] = average;
                 }
+                for(let x = 0; x < scores.length; x++){
+                    if(scores[x] < results[num]["bestReactionTestClick"]){
+                        results[num]["bestReactionTestClick"] = scores[x];
+                    }
+                    results[num]["reactionTestClicks"].push(scores[x]);
+                }
+                results[num]["reactionTestAverages"].push(average);
             }
-        })
-    })
+            results[num].save(function (err) {if (err) console.log('FAIL');});
+        });
+    });
 });
 
-app.get('/get/purchases', (req, res) => {
-    Users.find().exec((err, results)=>{
+app.post('/numberScores', (req, res) => {
+    let requestData = JSON.parse( req.body );
+    let score = requestData.score;
+    Users.find({}).exec( function (err, results) {
         results.forEach(function(error,num){
-            if(results[num]["username"] === user){
-                res.end(JSON.stringify(results[num]["purchases"]));
+            if (err) { 
+                return res.end("guest");
+            } else if (results[num]["username"] === user) {
+                if(score > results[num]["bestNumberMemoryScore"]){
+                    results[num]["bestNumberMemoryScore"] = score;
+                }
+                results[num]["numberMemoryScores"].push(score);
             }
-        })
-    })
+            results[num].save(function (err) {if (err) console.log('FAIL');});
+        });
+    });
+});
+
+app.post('/sequenceScores', (req, res) => {
+    let requestData = JSON.parse( req.body );
+    let score = requestData.score;
+    Users.find({}).exec( function (err, results) {
+        results.forEach(function(error,num){
+            if (err) { 
+                return res.end("guest");
+            } else if (results[num]["username"] === user) {
+                if(score > results[num]["bestSequenceMemoryScore"]){
+                    results[num]["bestSequenceMemoryScore"] = score;
+                }
+                results[num]["sequenceMemoryScores"].push(score);
+            }
+            results[num].save(function (err) {if (err) console.log('FAIL');});
+        });
+    });
+});
+
+app.post('/visualScores', (req, res) => {
+    let requestData = JSON.parse( req.body );
+    let score = requestData.score;
+    Users.find({}).exec( function (err, results) {
+        results.forEach(function(error,num){
+            if (err) { 
+                return res.end("guest");
+            } else if (results[num]["username"] === user) {
+                if(score > results[num]["bestVisualMemoryScore"]){
+                    results[num]["bestVisualMemoryScore"] = score;
+                }
+                results[num]["visualMemoryScores"].push(score);
+            }
+            results[num].save(function (err) {if (err) console.log('FAIL');});
+        });
+    });
+});
+
+app.get('/get/reactionScores', (req, res) => {
+    Users.find({}).exec( function (err, results) {
+        results.forEach(function(error,num){
+            if (err) { 
+                return res.end("Can't find user");
+            } else if (results[num]["username"] === user) {
+                let str = "" + results[num]["bestReactionTestAverage"] + " " + results[num]["bestReactionTestClick"];
+                res.send(str);
+            }
+        });
+    });
+});
+
+app.get('/get/numberScores', (req, res) => {
+    Users.find({}).exec( function (err, results) {
+        results.forEach(function(error,num){
+            if (err) { 
+                return res.end("Can't find user");
+            } else if (results[num]["username"] === user) {
+                let str = "" + results[num]["bestNumberMemoryScore"] 
+                res.send(str);
+            }
+        });
+    });
+});
+
+app.get('/get/sequenceScores', (req, res) => {
+    Users.find({}).exec( function (err, results) {
+        results.forEach(function(error,num){
+            if (err) { 
+                return res.end("Can't find user");
+            } else if (results[num]["username"] === user) {
+                let str = "" + results[num]["bestSequenceMemoryScore"]
+                res.send(str);
+            }
+        });
+    });
+});
+
+app.get('/get/visualScores', (req, res) => {
+    Users.find({}).exec( function (err, results) {
+        results.forEach(function(error,num){
+            if (err) { 
+                return res.end("Can't find user");
+            } else if (results[num]["username"] === user) { 
+                let str = "" + results[num]["bestVisualMemoryScore"];
+                res.send(str);
+            }
+        });
+    });
 });
 
 app.get('/get/user', (req, res) => {
@@ -202,7 +254,6 @@ app.get('/get/user', (req, res) => {
 
 function clearDB(){
   Users.collection.drop();
-  Items.collection.drop();
 }
 
 app.listen(port, () => 

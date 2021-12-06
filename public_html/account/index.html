@@ -1,0 +1,45 @@
+<!--
+    
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Account</title>
+    <link id="cssFile" rel="stylesheet" type="text/css" href="css.css">
+    <script src="code.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+  </head>
+  <body onload="checkUser()">
+    <div id>
+        <div id="top">
+            <span id="name" onclick="goHome()" onmouseover="topHover('name')" onmouseleave="topUnhover('name')">Skills Test</span>
+            <span id="leaderboard" onclick="goLeaderboard()" onmouseover="topHover('leaderboard')"
+             onmouseleave="topUnhover('leaderboard')">Leaderboard</span>
+            <span id="login" onclick="login()" onmouseover="topHover('login')" onmouseleave="topUnhover('login')"></span>
+            <span id="signup" onclick="signup()" onmouseover="topHover('signup')" onmouseleave="topUnhover('signup')">SIGN UP</span>
+        </div>
+        <div id="content">
+            <div id="left">
+                <p id="caa">Create an Account</p>
+                <span>Username</span>
+                <input type="text" id="cu_username"><br><br>
+                <span>Password</span>
+                <input type="text" id="cu_password"><br><br>
+                <input type="submit" id="create_account" value="Create Account" onclick="createAccount()"><br>
+                <span id="created"></span>
+            </div>
+            <div id="right">
+                <p id="loginSign">Login</p>
+                <span>Username</span>
+                <input type="text" id="username"><br><br>
+                <span>Password</span>
+                <input type="text" id="password"><br><br>
+                <input type="submit" id="login_account" value="Login" onclick="loginAccount()"><br>
+                <span id="bad_login"></span>
+            </div>
+        </div>
+        <div id="bottom"></div>
+    </div>
+  </body>
+</html>

@@ -20,20 +20,8 @@ function topUnhover(id){
     document.getElementById(id).style.backgroundColor = "";
 }
 
-function reactionTest(){
-    window.location.href = '/reactionTest/index.html';
-}
-
-function visualMemory(){
-    window.location.href = '/visualMemory/index.html';
-}
-
-function sequenceMemory(){
-    window.location.href = '/sequenceMemory/index.html';
-}
-
-function numberMemory(){
-    window.location.href = '/numberMemory/index.html';
+function goHome(){
+    window.location.href = '/app/index.html';
 }
 
 function login(){
@@ -75,3 +63,38 @@ function checkUser(){
     httpRequest.open('GET', url);
     httpRequest.send();
 }
+
+function loginAccount() {
+    let username = $('#username').val();
+    let password = $('#password').val();
+    $.get(
+      '/account/login/' + encodeURIComponent(username) + '/' + encodeURIComponent(password),
+      (data, status) => {
+        console.log(data);
+        if (data == '1') {
+          window.location.href = '/app/index.html';
+        }else if(data == '2'){
+          document.getElementById("bad_login").innerText = "Incorrect username or password";
+          document.getElementById("username").value = "";
+          document.getElementById("password").value = "";
+        }
+    });
+  }
+  
+  function createAccount() {
+    let username = $('#cu_username').val();
+    let password = $('#cu_password').val();
+    $.post(
+      '/account/create/' + encodeURIComponent(username) + '/' + encodeURIComponent(password),
+      (data, status) => {
+          if(data == "taken"){
+            document.getElementById("created").innerHTML = "Username is already taken.";
+          }else{
+            document.getElementById("created").innerHTML = "User created!";
+          }
+    });
+    document.getElementById("cu_username").value = "";
+    document.getElementById("cu_password").value = "";
+    document.getElementById("bad_username").innerHTML = "";
+    document.getElementById("created").innerHTML = "";
+  }

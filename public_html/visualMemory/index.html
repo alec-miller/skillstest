@@ -18,13 +18,13 @@ is currently on.
     <script src="code.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
   </head>
-  <body>
+  <body onload="checkUser()">
     <div id>
         <div id="top">
             <span id="name" onclick="goHome()" onmouseover="hover('name')" onmouseleave="unhover('name')">Skills Test</span>
             <span id="leaderboard" onclick="goLeaderboard()" onmouseover="hover('leaderboard')"
              onmouseleave="unhover('leaderboard')">Leaderboard</span>
-            <span id="login" onclick="login()" onmouseover="hover('login')" onmouseleave="unhover('login')">LOGIN</span>
+            <span id="login" onclick="login()" onmouseover="hover('login')" onmouseleave="unhover('login')"></span>
             <span id="signup" onclick="signup()" onmouseover="hover('signup')" onmouseleave="unhover('signup')">SIGN UP</span>
         </div>
         <div id="clickBox" onclick="startGame()">

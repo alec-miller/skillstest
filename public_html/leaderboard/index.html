@@ -7,14 +7,15 @@
     <meta charset="utf-8"/>
     <title>Account</title>
     <link id="cssFile" rel="stylesheet" type="text/css" href="css.css">
+    <script src="code.js"></script>
   </head>
-  <body>
+  <body onload="checkUser()">
     <div id>
         <div id="top">
             <span id="name" onclick="goHome()" onmouseover="topHover('name')" onmouseleave="topUnhover('name')">Skills Test</span>
             <span id="leaderboard" onclick="goLeaderboard()" onmouseover="topHover('leaderboard')"
              onmouseleave="topUnhover('leaderboard')">Leaderboard</span>
-            <span id="login" onclick="login()" onmouseover="topHover('login')" onmouseleave="topUnhover('login')">LOGIN</span>
+            <span id="login" onclick="login()" onmouseover="topHover('login')" onmouseleave="topUnhover('login')"></span>
             <span id="signup" onclick="signup()" onmouseover="topHover('signup')" onmouseleave="topUnhover('signup')">SIGN UP</span>
         </div>
         <div id="content">
@@ -30,7 +31,7 @@
                 <input type="text" id="username"><br>
                 <p>Password</p>
                 <input type="text" id="password"><br>
-                <input type="submit" id="login" value="Login">
+                <input type="submit" id="login_account" value="Login">
             </div>
         </div>
         <div id="bottom"></div>
