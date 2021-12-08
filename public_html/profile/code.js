@@ -60,7 +60,7 @@ function searchUser(user){
     httpRequest.onreadystatechange = () => {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
-            goThere();
+            profile();
         }else { 
             alert('Response failure'); }
         }
@@ -84,7 +84,12 @@ function getProfile(user){
                 let parts = split[x].split(":");
                 let str = "";
                 if(x % 2 == 0){
-                    str += "<tr><td><span id='score_'"+x+" class='scores'>" + parts[0] + ": " + parts[1];
+                    str += "<tr><td><span id='score_'"+x+" class='scores'>" + parts[0] + ": ";   
+                    if(parts[1] > 10000){
+                        str += '0';
+                    }else{
+                        str += parts[1];
+                    }
                     if(x == 2 || x == 4){
                         str += "ms";
                     }
@@ -117,7 +122,7 @@ function getProfile(user){
             alert('Response failure'); }
         }
     }
-    let url = '/get/stats';
+    let url = '/get/stats/'+user;
     httpRequest.open('GET', url);
     httpRequest.send();
 }
@@ -130,11 +135,18 @@ function checkUser(){
         if (httpRequest.status === 200) {
             let login = document.getElementById('login');
             if(httpRequest.responseText != "guest"){
-                document.getElementById("signup").innerHTML = "LOG OUT"
-                document.getElementById("signup").setAttribute("onClick","logout()")
-                login.innerHTML = "PROFILE";
-                login.setAttribute("onClick","profile()")
-                let user = httpRequest.responseText;
+                let user;
+                if(!httpRequest.responseText.endsWith(":search")){
+                    document.getElementById("signup").innerHTML = "LOG OUT"
+                    document.getElementById("signup").setAttribute("onClick","logout()")
+                    login.innerHTML = "PROFILE";
+                    login.setAttribute("onClick","profile()")
+                    user = httpRequest.responseText;
+                }else{
+                    user = httpRequest.responseText.substring(0,httpRequest.responseText.length-7);
+                login.innerHTML = "LOGIN";
+                login.setAttribute("onClick","login()")
+                }
                 getProfile(user);
             }else{
                 login.innerHTML = "LOGIN";

@@ -8,6 +8,7 @@ const port = 3000
 const db = mongoose.connection;
 const mongoDBURL = 'mongodb://127.0.0.1/skillstest'
 var user = "guest";
+var searchUser = "";
 
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -321,12 +322,12 @@ app.get('/get/leaderboard/:TYPE', (req, res) => {
     }
 });
 
-app.get('/get/stats', (req, res) => {
+app.get('/get/stats/:USER', (req, res) => {
     Users.find({}).exec( function (err, results) {
         results.forEach(function(error,num){
             if (err) { 
                 return res.end("Can't find user");
-            } else if (results[num]["username"] === user) {
+            } else if (results[num]["username"] === req.params.USER) {
                 res.send('Best Number Memory Score:'+results[num]['bestNumberMemoryScore']+ "_" +
                     'All Number Memory Scores:'+results[num]['numberMemoryScores']+ "_" +
                     'Best Reaction Test Average:'+results[num]['bestReactionTestAverage']+ "_" +
@@ -343,13 +344,21 @@ app.get('/get/stats', (req, res) => {
     });
 });
 
+let flag = false;
+
 app.post('/account/search/:SEARCH', (req, res) => {
-    user = req.params.SEARCH;
-    res.send(user);
+    searchUser = req.params.SEARCH;
+    flag = true;
+    res.send(searchUser);
 });
 
 app.get('/get/user', (req, res) => {
-    res.send(user);
+    if(flag){
+        flag = false;
+        res.send(searchUser + ":search");
+    }else{
+        res.send(user);
+    }
 });
 
 app.get('/account/logout', (req, res) => {

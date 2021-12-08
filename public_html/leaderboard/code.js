@@ -102,10 +102,6 @@ function getLeaderboard(type){
     httpRequest.send();
 }
 
-function userProfile(user){
-    goThere(1);
-}
-
 function checkUser(){
     var httpRequest = new XMLHttpRequest();
     if (!httpRequest) { return false; }
