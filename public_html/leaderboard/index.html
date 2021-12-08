@@ -9,7 +9,7 @@
     <link id="cssFile" rel="stylesheet" type="text/css" href="css.css">
     <script src="code.js"></script>
   </head>
-  <body onload="checkUser()">
+  <body onload="checkUser(), getLeaderboard('number')">
     <div id>
         <div id="top">
             <span id="name" onclick="goHome()" onmouseover="topHover('name')" onmouseleave="topUnhover('name')">Skills Test</span>
@@ -19,20 +19,29 @@
             <span id="signup" onclick="signup()" onmouseover="topHover('signup')" onmouseleave="topUnhover('signup')">SIGN UP</span>
         </div>
         <div id="content">
-            <div id="left">
-                <p>Username</p>
-                <input type="text" id="new_username"><br>
-                <p>Password</p>
-                <input type="text" id="new_password"><br>
-                <input type="submit" id="create_account" value="Create Account">
+            <div class="dropdown">
+                <span>Current Test:</span><br>
+                <button id="curr_test_btn" class="dropbtn"></button>
+                <div class="dropdown-content">
+                  <span class="options" id="o1" onclick="getLeaderboard('number')" onmouseover="topHover('o1');"
+                   onmouseleave="topUnhover('o1')">Number Memory</span><br>
+                  <span class="options" id="o2" onclick="getLeaderboard('reactionClick')" onmouseover="topHover('o2');"
+                   onmouseleave="topUnhover('o2')">Reaction Test: Click</span><br>
+                  <span class="options" id="o3" onclick="getLeaderboard('reactionAverage')" onmouseover="topHover('o3');"
+                   onmouseleave="topUnhover('o3')">Reaction Test: Average</span><br>
+                  <span class="options" id="o4" onclick="getLeaderboard('sequence')" onmouseover="topHover('o4');"
+                   onmouseleave="topUnhover('o4')">Sequence Memory</span><br>
+                  <span class="options" id="o5" onclick="getLeaderboard('visual')" onmouseover="topHover('o5');"
+                   onmouseleave="topUnhover('o5')">Visual Memory</span>
+                </div>
+              </div>
+            <h1 id="curr_test"></h1>
+            <div id="heading">
+                <span id="pos_1" class="pos">Position</span>
+                <span id="user_" class="user">Name</span>
+                <span id="time" class="times">Score</span>
             </div>
-            <div id="right">
-                <p>Username</p>
-                <input type="text" id="username"><br>
-                <p>Password</p>
-                <input type="text" id="password"><br>
-                <input type="submit" id="login_account" value="Login">
-            </div>
+            <div id="board"></div>
         </div>
         <div id="bottom"></div>
     </div>

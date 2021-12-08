@@ -53,25 +53,6 @@ function addSession(username) {
     sessions[username] = now;
 }
 
-function doesUserHaveSession(username) {
-    return username in sessions;
-}
-
-function authenticate(req, res, next) {
-    var c = req.cookies;
-    if (c && c.login)  {
-      var username = c.login.username;
-      if (doesUserHaveSession(username)) {
-        addSession(username);
-        next();
-      } else {
-        res.redirect('/app/index.html');
-      }
-    } else {
-      res.redirect('/app/index.html');
-    }
-  }
-
 app.post('/account/create/:username/:password', function (req, res) {
     var count = 0;
     Users.find().exec((err, results)=>{
@@ -248,12 +229,115 @@ app.get('/get/visualScores', (req, res) => {
     });
 });
 
+let numLeaderboards = [];
+let rcLeaderboards = [];
+let raLeaderboards = [];
+let seqLeaderboards = [];
+let visLeaderboards = [];
+
+app.get('/get/leaderboard/:TYPE', (req, res) => {
+    let type = req.params.TYPE;
+    let find = '';
+    let search = true;
+    if(type == "number"){
+        find = "bestNumberMemoryScore";
+        if(numLeaderboards.length >= 199){
+            search = false;
+        }
+    }else if(type == "reactionClick"){
+        find = "bestReactionTestClick";
+        if(rcLeaderboards.length >= 199){
+            search = false;
+        }
+    }else if(type == "reactionAverage"){
+        find = "bestReactionTestAverage";
+        if(raLeaderboards.length >= 199){
+            search = false;
+        }
+    }else if(type == "sequence"){
+        find = "bestSequenceMemoryScore";
+        if(seqLeaderboards.length >= 199){
+            search = false;
+        }
+    }else if(type == "visual"){
+        find = "bestVisualMemoryScore";
+        if(visLeaderboards.length >= 199){
+            search = false;
+        }
+    }
+    if(find != '' && search){
+        Users.find({}).exec( function (err, results) {
+            let holder = {};
+            let x = 0;
+            let str = "";
+            results.forEach(function(error,num){
+                if (err) { 
+                    return res.end("Can't find user");
+                } else{
+                    holder[results[num]["username"]] = results[num][find];
+                }
+            });
+            var items = Object.keys(holder).map(function(key) {
+                return [key, holder[key]];
+            });
+
+            items.sort(function(first, second) {
+                return second[1] - first[1];
+            });
+            holder = items;
+            if(type == "number"){
+                while(holder[x] != undefined && x < 200){
+                    numLeaderboards.push(holder[x]);
+                    str += holder[x][0] + ":" + holder[x][1] + " ";
+                    x++
+                }
+            }else if(type == "reactionClick"){
+                while(holder[x] != undefined && x < 200){
+                    rcLeaderboards.push(holder[x]);
+                    str += holder[x][0] + ":" + holder[x][1] + " ";
+                    x++
+                }
+            }else if(type == "reactionAverage"){
+                while(holder[x] != undefined && x < 200){
+                    raLeaderboards.push(holder[x]);
+                    str += holder[x][0] + ":" + holder[x][1] + " ";
+                    x++
+                }
+            }else if(type == "sequence"){
+                while(holder[x] != undefined && x < 200){
+                    seqLeaderboards.push(holder[x]);
+                    str += holder[x][0] + ":" + holder[x][1] + " ";
+                    x++
+                }
+            }else if(type == "visual"){
+                while(holder[x] != undefined && x < 200){
+                    visLeaderboards.push(holder[x]);
+                    str += holder[x][0] + ":" + holder[x][1] + " ";
+                    x++
+                }
+            }
+            res.send(str);
+        });
+    }
+});
+
 app.get('/get/user', (req, res) => {
     res.send(user);
 });
 
+app.get('/account/logout', (req, res) => {
+    delete sessions[user];
+    user = "guest";
+    res.send();
+});
+
 function clearDB(){
   Users.collection.drop();
+  let numLeaderboards = [];
+  let rcLeaderboards = [];
+  let raLeaderboards = [];
+  let seqLeaderboards = [];
+  let visLeaderboards = [];
 }
 
 app.listen(port, () => 

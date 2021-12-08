@@ -60,12 +60,6 @@ body{
     margin-right: 20px;
 }
 
-#table{
-    top: 0%;
-    left: 20%;
-    position: absolute;
-}
-
 #content{
     background-color: rgb(196, 191, 191);
     top: 10%;
@@ -76,11 +70,7 @@ body{
     position: absolute;
     margin-bottom: 10px;
     text-align: center;
-}
-
-tr,td{
-    width: 100px;
-    padding-left: 100px;
+    font-size: 32px;
 }
 
 #square_1,#square_2,#square_3,#square_4{
@@ -94,4 +84,109 @@ tr,td{
     font-size: 50px;
     font-weight: bold;
     padding-top: 25%;
+}
+
+.dropbtn {
+    padding: 16px;
+    font-size: 24px;
+    border: none;
+}
+
+.dropdown {
+    left: 2%;
+    top: 8%;
+    position: absolute;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    width: 400px;
+    height: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+.options{
+    width: 400px;
+    left: 0%;
+    position: absolute;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: rgba(16, 110, 187, 0.822);}
+
+#heading{
+    padding-bottom: 50px;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+}
+
+.box{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.useless{
+    width:0px;
+}
+
+.posBox{
+    width: 100px;
+    height: 50px;
+    left: 31%;
+    position: absolute;
+}
+
+.userBox{
+    height: 50px;
+    left: 45%;
+    position: absolute;
+}
+
+.scoreBox{
+    width: 100px;
+    height: 50px;
+    left: 70%;
+    position: absolute;
+}
+
+.pos{
+    left: 30%;
+    position: absolute;
+
+}
+
+.user{
+    left: 45%;
+    position: absolute;
+}
+
+.times{
+    left: 70%;
+    position: absolute;
+}
+
+#table{
+    top: 35%;
+    left: 24%;
+    position: absolute;
+    overflow-y: auto;
+}
+
+tr,td{
+    width: 100px;
+    padding-left: 100px;
 }

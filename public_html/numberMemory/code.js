@@ -185,3 +185,23 @@ function getScores() {
     httpRequest.open('GET', url);
     httpRequest.send();
   }
+
+  function logout(){
+      var httpRequest = new XMLHttpRequest();
+      if (!httpRequest) { return false; }
+      httpRequest.onreadystatechange = () => {
+      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+          if (httpRequest.status === 200) {
+              let login = document.getElementById('login');
+              document.getElementById("signup").innerHTML = "SIGN UP"
+              document.getElementById("signup").setAttribute("onClick","signup()")
+              login.innerHTML = "LOGIN";
+              login.setAttribute("onClick","login()")
+          }else { 
+              alert('Response failure'); }
+          }
+      }
+      let url = '/account/logout';
+      httpRequest.open('GET', url);
+      httpRequest.send();
+  }
