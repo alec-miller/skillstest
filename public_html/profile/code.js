@@ -50,9 +50,27 @@ function profile(){
     window.location.href = '/profile/index.html';
 }
 
-let user = ""
+function goThere(){
+    window.location.href = '/profile/index.html';
+}
 
-function getProfile(){
+function searchUser(user){
+    var httpRequest = new XMLHttpRequest();
+    if (!httpRequest) { return false; }
+    httpRequest.onreadystatechange = () => {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200) {
+            goThere();
+        }else { 
+            alert('Response failure'); }
+        }
+    }
+    let url = '/account/search/'+user;
+    httpRequest.open('POST', url);
+    httpRequest.send();
+}
+
+function getProfile(user){
     var httpRequest = new XMLHttpRequest();
     if (!httpRequest) { return false; }
     httpRequest.onreadystatechange = () => {
@@ -71,7 +89,8 @@ function getProfile(){
                         str += "ms";
                     }
                     str += "</span></td></tr>";
-                    table.innerHTML += str;
+                    if(table != null){
+                    table.innerHTML += str;}
                 }else{
                     let get = parts[1];
                     scores = get.split(",");
@@ -91,7 +110,7 @@ function getProfile(){
                         }
                     }
                     str += '</div></div><br><br></td></tr>';
-                    table.innerHTML += str;
+                    if(table != null){table.innerHTML += str;}
                 }
             }
         }else { 
@@ -115,8 +134,8 @@ function checkUser(){
                 document.getElementById("signup").setAttribute("onClick","logout()")
                 login.innerHTML = "PROFILE";
                 login.setAttribute("onClick","profile()")
-                user = httpRequest.responseText;
-                getProfile();
+                let user = httpRequest.responseText;
+                getProfile(user);
             }else{
                 login.innerHTML = "LOGIN";
                 login.setAttribute("onClick","login()")

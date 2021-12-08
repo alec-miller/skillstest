@@ -343,6 +343,11 @@ app.get('/get/stats', (req, res) => {
     });
 });
 
+app.post('/account/search/:SEARCH', (req, res) => {
+    user = req.params.SEARCH;
+    res.send(user);
+});
+
 app.get('/get/user', (req, res) => {
     res.send(user);
 });

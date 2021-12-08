@@ -65,7 +65,11 @@ function getLeaderboard(type){
             while(vals[x] != '' && x < 200 && failsafe > 0){
                 let v = vals[x].split(":")
                 if(v[1] < 100000){
-                    b.innerHTML += '<div id="box_'+(x-badCount)+'" class="box" onmouseover="hover('+(x-badCount)+');" onmouseleave="unhover('+(x-badCount)+')"><span id="useless">&nbsp;</span><span id="pos'+(x-badCount)+'" class="posBox">'+((x-badCount)+1)+'.</span><span id="user" class="userBox">'+v[0]+'</span><span id="time" class="scoreBox">'+v[1]+'</span></div>';
+                    b.innerHTML += '<div id="box_'+(x-badCount)+'" class="box" onclick="searchUser(\''+v[0]+
+                    '\')" onmouseover="hover('+(x-badCount)+');" onmouseleave="unhover('+(x-badCount)+')">' + 
+                    '<span id="useless">&nbsp;</span><span id="pos'+(x-badCount)+'" class="posBox">'+((x-badCount)+1)+
+                    '.</span><span id="user" class="userBox">'+v[0]+'</span><span id="time" class="scoreBox">'+v[1]+
+                    '</span></div>';
                     failsafe = 10;
                 }else{
                     failsafe--;
@@ -98,6 +102,10 @@ function getLeaderboard(type){
     httpRequest.send();
 }
 
+function userProfile(user){
+    goThere(1);
+}
+
 function checkUser(){
     var httpRequest = new XMLHttpRequest();
     if (!httpRequest) { return false; }
@@ -105,6 +113,7 @@ function checkUser(){
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
             let login = document.getElementById('login');
+            console.log(httpRequest);
             if(httpRequest.responseText != "guest"){
                 document.getElementById("signup").innerHTML = "LOG OUT"
                 document.getElementById("signup").setAttribute("onClick","logout()")
