@@ -1,0 +1,194 @@
+body{
+    background-color: rgba(16, 110, 187, 0.822);
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+#top{
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 90%;
+    position: absolute;
+    padding-left: 30px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+#name{
+    top: 0%;
+    left: 0%;
+    position: absolute;
+    width: 220px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+#leaderboard{
+    top: 0%;
+    left: 15%;
+    position: absolute;
+    width: 250px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+#login{
+    top: 0%;
+    left: 75%;
+    position: absolute;
+    width: 170px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+#signup{
+    top: 0%;
+    right: 0%;
+    position: absolute;
+    width: 170px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    padding-top: 15px;
+    margin-right: 20px;
+}
+
+#clickBox{
+    background-color: rgb(196, 191, 191);
+    top: 10%;
+    left: 0%;
+    right: 0%;
+    bottom: 15%;
+    position: absolute;
+    text-align: center;
+}
+
+#title{
+    font-size: 56px;
+    font-weight: bold;
+}
+
+#bottom{
+    font-size: 36px;
+    top: 85%;
+    left: 0%;
+    right: 0%;
+    position: absolute;
+}
+
+#pb{
+    padding-left: 10%;
+}
+
+#current_score{
+    padding-left: 45%;
+}
+
+#desc_1{
+    font-size: 36px;
+}
+
+#desc_2 {
+    font-size: 22px;;
+}
+
+.square{
+    width: 125px;
+    height: 125px;
+    background-color: rgb(91, 178, 236);
+    border: 1px solid black;
+    border-radius: 25px;
+}
+
+#table{
+    left: 35%;
+    top: 6%;
+    right: 35%;
+    bottom: 10%;
+    position: absolute;
+    /* visibility: hidden; */
+}
+
+tr,td{
+    width: 200px;
+    padding-top: 25px;
+}
+
+#game_started{
+    visibility: hidden;
+}
+
+#not_started{
+    visibility: auto;
+}
+
+.txt-box {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 600px;
+    height: 120px;
+    background-color: rgb(91, 178, 236);
+    border: 2px solid rgb(62, 132, 179);
+    outline: none;
+    margin: auto;
+    resize: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.game {
+    background-color: rgb(151, 213, 255);
+    padding: 5px;
+    max-width: 35%;
+    border-radius: 5px;
+    height: 220px;
+    text-align: center;
+    position: absolute;
+    position: absolute;
+    margin-top: 50px;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) 
+}
+
+.txtbox:focus {
+    border-color: rgb(31, 31, 31);
+}
+
+#words {
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-size: 18px;
+}
+
+.green {
+    color: limegreen;
+}
+
+.red {
+    color: red;
+    text-decoration: underline;
+}
+
+#scorebar {
+    position: absolute;
+    font-size: 32px;
+    margin-top: 20px;
+    top: 70%;
+    display: inline-block;
+    text-align: center;
+    left: 45%;
+}
+
+#key {
+    opacity: 0%;
+    width: 0%;
+    height: 0%;
+}

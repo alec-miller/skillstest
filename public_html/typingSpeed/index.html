@@ -1,0 +1,53 @@
+<!-- 
+
+Typing Speed Test
+----------------
+Presents the user with a random quote fetched from quotable.io, 
+the user must then type the contents of said quote correctly and
+as quickly as possible, and will be scored based on how long this
+takes to complete.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Visual Memory</title>
+    <link id="cssFile" rel="stylesheet" type="text/css" href="css.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="code.js"></script>
+  </head>
+  <body>
+    <div id>
+        <div id="top">
+            <span id="name" onclick="goHome()" onmouseover="hover('name')" onmouseleave="unhover('name')">Skills Test</span>
+            <span id="leaderboard" onclick="goLeaderboard()" onmouseover="hover('leaderboard')"
+             onmouseleave="unhover('leaderboard')">Leaderboard</span>
+            <span id="login" onclick="login()" onmouseover="hover('login')" onmouseleave="unhover('login')"></span>
+            <span id="signup" onclick="signup()" onmouseover="hover('signup')" onmouseleave="unhover('signup')">SIGN UP</span>
+        </div>
+        <div id="clickBox">
+            <div id="not_started">
+                <p id="title">Typing Test</p>
+                <p id="desc_1">Type the following words:</p>
+                <p id="desc_2">The timer starts when you begin typing</p>
+            </div>
+            <!-- <div class="timer" id="timer"></div> -->
+            <div class="game">
+                <div class="words-list" id="words"></div>
+                <textarea id="txtbox" class="txt-box" onkeydown="startGame()" autofocus></textarea>
+            </div>
+        </div>
+        <div id="scorebar">
+            <div id="scoredisp">Score: </div>
+        </div>
+        <div id="bottom">
+            <span id="pb"></span>
+            <span id="current_score"></span>
+            <input type="button" id="retry" value="Try again!" style="visibility: hidden;">
+        </div>
+    </div>
+  </body>
+  <span id='key'></span>
+</html>
