@@ -1,0 +1,33 @@
+<!--
+    
+Profile
+---------------
+A user's profile with a quick list of all of their stats
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Account</title>
+    <link id="cssFile" rel="stylesheet" type="text/css" href="css.css">
+    <script src="code.js"></script>
+  </head>
+  <body onload="checkUser()">
+    <div id>
+        <div id="top">
+            <span id="name" onclick="goHome()" onmouseover="topHover('name')" onmouseleave="topUnhover('name')">Skills Test</span>
+            <span id="leaderboard" onclick="goLeaderboard()" onmouseover="topHover('leaderboard')"
+             onmouseleave="topUnhover('leaderboard')">Leaderboard</span>
+            <span id="login" onclick="login()" onmouseover="topHover('login')" onmouseleave="topUnhover('login')"></span>
+            <span id="signup" onclick="signup()" onmouseover="topHover('signup')" onmouseleave="topUnhover('signup')">SIGN UP</span>
+        </div>
+        <div id="content">
+            <h1 id="user"></h1>
+            <table id="table">
+            </table>
+        </div>
+        <div id="bottom"></div>
+    </div>
+  </body>
+</html>

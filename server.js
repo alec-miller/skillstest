@@ -321,6 +321,28 @@ app.get('/get/leaderboard/:TYPE', (req, res) => {
     }
 });
 
+app.get('/get/stats', (req, res) => {
+    Users.find({}).exec( function (err, results) {
+        results.forEach(function(error,num){
+            if (err) { 
+                return res.end("Can't find user");
+            } else if (results[num]["username"] === user) {
+                res.send('Best Number Memory Score:'+results[num]['bestNumberMemoryScore']+ "_" +
+                    'All Number Memory Scores:'+results[num]['numberMemoryScores']+ "_" +
+                    'Best Reaction Test Average:'+results[num]['bestReactionTestAverage']+ "_" +
+                    'All Reaction Test Averages:'+results[num]['reactionTestAverages']+ "_" +
+                    'Best Reaction Test Click:'+results[num]['bestReactionTestClick']+ "_" +
+                    'All Reaction Test Clicks:'+results[num]['reactionTestClicks']+ "_" +
+                    'Best Sequence Memory Score:'+results[num]['bestSequenceMemoryScore']+ "_" +
+                    'All Sequence Memory Scores:'+results[num]['sequenceMemoryScores']+ "_" +
+                    'Best Visual Memory Score:'+results[num]['bestVisualMemoryScore']+ "_" +
+                    'All Visual Memory Scores:'+results[num]['visualMemoryScores']
+                    );
+            }
+        });
+    });
+});
+
 app.get('/get/user', (req, res) => {
     res.send(user);
 });
