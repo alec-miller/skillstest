@@ -36,6 +36,10 @@ function numberMemory(){
     window.location.href = '/numberMemory/index.html';
 }
 
+function typingSpeed(){
+    window.location.href = '/typingSpeed/index.html';
+}
+
 function login(){
     window.location.href = '/account/index.html';
 }

@@ -25,6 +25,8 @@ const usersSchema = new mongoose.Schema({
     bestSequenceMemoryScore: Number,
     visualMemoryScores: [Number],
     bestVisualMemoryScore: Number,
+    typingTestScores: [Number],
+    bestTypingTestScore: Number
 });
 
 const Users = mongoose.model('Users', usersSchema);
@@ -70,7 +72,8 @@ app.post('/account/create/:username/:password', function (req, res) {
                 bestReactionTestClick: 10000000,
                 bestNumberMemoryScore: 0,
                 bestSequenceMemoryScore: 0,
-                bestVisualMemoryScore: 0
+                bestVisualMemoryScore: 0,
+                bestTypingTestScore: 0
             });
             newUser.save(function (err) { if (err) console.log('FAIL'); });
             res.send("valid");
@@ -178,6 +181,24 @@ app.post('/visualScores', (req, res) => {
     });
 });
 
+app.post('/typingScores', (req, res) => {
+    let requestData = JSON.parse( req.body );
+    let score = requestData.score;
+    Users.find({}).exec( function (err, results) {
+        results.forEach(function(error,num){
+            if (err) { 
+                return res.end("guest");
+            } else if (results[num]["username"] === user) {
+                if(score > results[num]["bestTypingTestScore"]){
+                    results[num]["bestTypingTestScore"] = score;
+                }
+                results[num]["typingTestScores"].push(score);
+            }
+            results[num].save(function (err) {if (err) console.log('FAIL');});
+        });
+    });
+});
+
 app.get('/get/reactionScores', (req, res) => {
     Users.find({}).exec( function (err, results) {
         results.forEach(function(error,num){
@@ -230,11 +251,25 @@ app.get('/get/visualScores', (req, res) => {
     });
 });
 
+app.get('/get/typingScores', (req, res) => {
+    Users.find({}).exec( function (err, results) {
+        results.forEach(function(error,num){
+            if (err) { 
+                return res.end("Can't find user");
+            } else if (results[num]["username"] === user) { 
+                let str = "" + results[num]["bestTypingTestScore"];
+                res.send(str);
+            }
+        });
+    });
+});
+
 let numLeaderboards = [];
 let rcLeaderboards = [];
 let raLeaderboards = [];
 let seqLeaderboards = [];
 let visLeaderboards = [];
+let typLeaderboards=[];
 
 app.get('/get/leaderboard/:TYPE', (req, res) => {
     let type = req.params.TYPE;
@@ -263,6 +298,11 @@ app.get('/get/leaderboard/:TYPE', (req, res) => {
     }else if(type == "visual"){
         find = "bestVisualMemoryScore";
         if(visLeaderboards.length >= 199){
+            search = false;
+        }
+    }else if(type == "typing"){
+        find = "bestTypingTestScore";
+        if(typLeaderboards.length >= 199){
             search = false;
         }
     }
@@ -316,6 +356,12 @@ app.get('/get/leaderboard/:TYPE', (req, res) => {
                     str += holder[x][0] + ":" + holder[x][1] + " ";
                     x++
                 }
+            }else if(type == "typing"){
+                while(holder[x] != undefined && x < 200){
+                    typLeaderboards.push(holder[x]);
+                    str += holder[x][0] + ":" + holder[x][1] + " ";
+                    x++
+                }
             }
             res.send(str);
         });
@@ -337,7 +383,9 @@ app.get('/get/stats/:USER', (req, res) => {
                     'Best Sequence Memory Score:'+results[num]['bestSequenceMemoryScore']+ "_" +
                     'All Sequence Memory Scores:'+results[num]['sequenceMemoryScores']+ "_" +
                     'Best Visual Memory Score:'+results[num]['bestVisualMemoryScore']+ "_" +
-                    'All Visual Memory Scores:'+results[num]['visualMemoryScores']
+                    'All Visual Memory Scores:'+results[num]['visualMemoryScores']+ "_" +
+                    'Best Typing Test Score:'+results[num]['bestTypingTestScore']+ "_" +
+                    'All Typing Test Scores:'+results[num]['typingTestScores']
                     );
             }
         });
@@ -374,6 +422,7 @@ function clearDB(){
   let raLeaderboards = [];
   let seqLeaderboards = [];
   let visLeaderboards = [];
+  let typLeaderboards = [];
 }
 
 app.listen(port, () => 

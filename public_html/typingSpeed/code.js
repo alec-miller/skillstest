@@ -55,11 +55,9 @@ function checkUser(){
 let time
 let startTime
 let endTime
-let done = false
-
-let timeTest2
 
 window.onload= function (){
+    getScores()
     const txtElem = document.getElementById('txtbox')
     if (txtElem) {
         txtElem.addEventListener('input', () => {
@@ -122,6 +120,7 @@ var startGame = (function() {
     };
 })();
 
+var score
 function stopTimer() {
     let end = new Date()
     endTime = end.getTime()
@@ -130,9 +129,50 @@ function stopTimer() {
     var wpm  = 20 * 60000 / time
     // wpm = word count * 60000 / time
 
-    var score = document.getElementById('scoredisp')
-    score.innerText = 'Score: ' + String(Math.floor(wpm)) + ' WPM'
+    score = String(Math.floor(wpm))
+    var scoreElem = document.getElementById('scoredisp')
+    scoreElem.innerText = 'Score: ' + score + ' WPM'
+    sendScores(score)
 }
+
+function sendScores(score){
+    var httpRequest = new XMLHttpRequest();
+    if (!httpRequest) { return false; }
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            if (httpRequest.status === 200) {
+            } else { alert('Response failure'); }
+        }
+    }
+    console.log(score)
+    newObject = {'score':score}
+    dataString = JSON.stringify(newObject);
+    let url = '/typingScores/';
+    httpRequest.open('POST', url);
+    httpRequest.setRequestHeader('Content-type', 'application/json');
+    httpRequest.send(dataString);
+}
+
+function getScores() {
+    var httpRequest = new XMLHttpRequest();
+    if (!httpRequest) { return false; }
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            if (httpRequest.status === 200) {
+                let scores = httpRequest.responseText;
+                if(scores == "undefined" || scores == "10000000"){
+                    pb = 0;
+                }else{
+                    pb = scores;
+                }
+                document.getElementById("pb").innerHTML = "Personal Best: " + pb;
+            } else { alert('Response failure'); }
+        }
+    }
+    let url = '/get/typingScores/';
+    httpRequest.open('GET', url);
+    httpRequest.send();
+  }
 
 function logout(){
     var httpRequest = new XMLHttpRequest();

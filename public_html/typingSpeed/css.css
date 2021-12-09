@@ -192,3 +192,22 @@ tr,td{
     width: 0%;
     height: 0%;
 }
+
+#bottom{
+    font-size: 36px;
+    top: 70%;
+    left: 0%;
+    right: 0%;
+    position: absolute;
+}
+
+#pb{
+    position: absolute;
+    padding-left: 10%;
+    left:35%;
+    font-size: 18px;
+}
+
+#current_score{
+    padding-left: 40%;
+}

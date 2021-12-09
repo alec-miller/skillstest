@@ -96,6 +96,9 @@ function getLeaderboard(type){
     }else if(type == "visual"){
         document.getElementById("curr_test").innerHTML = "Visual Memory";
         document.getElementById("curr_test_btn").innerHTML = "Visual Memory";
+    }else if(type == "typing"){
+        document.getElementById("curr_test").innerHTML = "Typing Speed";
+        document.getElementById("curr_test_btn").innerHTML = "Typing Speed";
     }
     let url = '/get/leaderboard/' + type;
     httpRequest.open('GET', url);

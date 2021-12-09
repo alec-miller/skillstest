@@ -93,6 +93,9 @@ function getProfile(user){
                     if(x == 2 || x == 4){
                         str += "ms";
                     }
+                    if (x == 10) {
+                        str += " wpm"
+                    }
                     str += "</span></td></tr>";
                     if(table != null){
                     table.innerHTML += str;}
@@ -110,6 +113,9 @@ function getProfile(user){
                             ');onmouseleave="topUnhover(\'o\'' + i + ')">'+scores[i];
                             if(x == 3 || x == 5){
                                 str += "ms";
+                            }
+                            if(x == 11) {
+                                str += " wpm"
                             }
                             str += '</span><br>';
                         }
